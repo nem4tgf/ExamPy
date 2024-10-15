@@ -10,12 +10,12 @@ patients_collection = db['patients']
 doctors_collection = db['doctors']
 appointments_collection = db['appointments']
 
-# Route to display the patient form
+
 @app.route('/add_patients_form', methods=['GET'])
 def show_add_patients_form():
     return render_template('add_patients.html')
 
-# Route to add patients from the form
+
 @app.route('/add_patients', methods=['POST'])
 def add_patients():
     for i in range(1, 4):
@@ -33,12 +33,11 @@ def add_patients():
         patients_collection.insert_one(patient)
     return redirect('/add_patients_form')
 
-# Route to display the doctor form
+
 @app.route('/add_doctors_form', methods=['GET'])
 def show_add_doctors_form():
     return render_template('add_doctors.html')
 
-# Route to add doctors from the form
 @app.route('/add_doctors', methods=['POST'])
 def add_doctors():
     for i in range(1, 6):
@@ -47,12 +46,12 @@ def add_doctors():
         doctors_collection.insert_one(doctor)
     return redirect('/add_doctors_form')
 
-# Route to display the appointment form
+
 @app.route('/add_appointments_form', methods=['GET'])
 def show_add_appointments_form():
     return render_template('add_appointments.html')
 
-# Route to add appointments from the form
+
 @app.route('/add_appointments', methods=['POST'])
 def add_appointments():
     for i in range(1, 4):
@@ -71,7 +70,7 @@ def add_appointments():
         appointments_collection.insert_one(appointment)
     return redirect('/add_appointments_form')
 
-# Route to display report
+
 @app.route('/report', methods=['GET'])
 def generate_report():
     appointments = list(appointments_collection.find())
@@ -107,10 +106,10 @@ def get_appointments_today():
             'gender': patient['gender'] if patient else 'N/A',
             'doctor_name': appointment['doctor_name'],
             'status': appointment['status'],
-            'note': 'N/A'  # Placeholder for any additional notes
+            'note': 'N/A'  
         })
 
-    # Render the template and pass today's appointments to the HTML
+ 
     return render_template('today_appointments.html', appointments=appointments_list)
 
 @app.route('/')
